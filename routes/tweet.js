@@ -6,28 +6,33 @@ const Tweet = require("../models/Tweet");
 const Comment = require("../models/Comment");
 const User = require("../models/User");
 
-// User.findOne({ name: "timmy" })
-//   .then(user => {
-//     console.log(user);
-//     const tweet = new Tweet({
-//       _id: new mongoose.Types.ObjectId(),
-//       title: "secondTweet",
-//       creator: user._id,
-//       upvotes: 0
-//     });
+function newPost(creator, title, content) {
+  User.findOne({ name: creator })
+    .then(user => {
+      console.log(user);
+      const tweet = new Tweet({
+        _id: new mongoose.Types.ObjectId(),
+        image: content,
+        title: title,
+        creator: user._id,
+        upvotes: 0
+      });
 
-//     // tweet.save(function(err) {
-//     //   if (err) return console.log(err);
-//     // });
-//   })
-//   .catch(err => console.log(err));
+      tweet.save(function(err) {
+        if (err) return console.log(err);
+      });
+    })
+    .catch(err => console.log(err));
+}
 
-// Tweet.findOne({ title: "firstTweet" })
-//   .populate("creator")
-//   .exec(function(err, tweet) {
-//     if (err) return handleError(err);
-//     console.log("The creator is %s", tweet.creator._id);
-//     // prints "The author is Ian Fleming"
-//   });
+function createFeed(user) {
+  // Tweet.findOne({ title: "firstTweet" })
+  //   .populate("creator")
+  //   .exec(function(err, tweet) {
+  //     if (err) return handleError(err);
+  //     console.log("The creator is %s", tweet.creator._id);
+  //     // prints "The author is Ian Fleming"
+  //   });
+}
 
 module.exports = router;

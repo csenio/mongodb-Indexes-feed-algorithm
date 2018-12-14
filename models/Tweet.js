@@ -20,4 +20,3 @@ tweetSchema.index({ createdAt: 1 });
 const Tweet = mongoose.model("Tweet", tweetSchema);
 
 module.exports = Tweet;
-// export default Tweet;
